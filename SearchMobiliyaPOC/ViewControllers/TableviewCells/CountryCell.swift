@@ -17,14 +17,18 @@ class CountryCell: UITableViewCell {
     @IBOutlet var populationCountLabel: UILabel?
     @IBOutlet var areaSizeLabel: UILabel?
     
+    @IBOutlet weak var countryImageView: UIImageView!
     func config(withCountry country: CountryDataModel?) {
+
         if let flag = country?.flag, let flagUrl = URL(string: flag), Reachability.isConnected() {
             if !flag.contains("shn.svg") {
                 self.flagView?.image = SVGKImage(contentsOf: flagUrl)
             }
         } else {
-            let receivedImage:SVGKImage = SVGKImage(data: country?.imageData)
-            self.flagView?.image = receivedImage
+//        if country?.imageData != nil {
+//            let receivedImage:SVGKImage = SVGKImage(data: country?.imageData)
+//            self.flagView?.image = receivedImage
+//        }
         }
         countryNameLabel?.text = country?.countryName
         areaSizeLabel?.text = "\(country?.areaSize ?? 0)"

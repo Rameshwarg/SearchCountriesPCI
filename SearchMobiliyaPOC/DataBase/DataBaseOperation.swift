@@ -35,10 +35,9 @@ class DataBaseOperation {
         user.setValue(countryData.region, forKey: "region")
         user.setValue(countryData.flag, forKey: "flag")
         user.setValue(countryData.imageData, forKey: "imagedata")
-
         do {
             try managedContext.save()
-            UIAlertControllerForAlert.sharedInstance
+            UIAlertControllerForAlert.sharedInstance.showAlertOnMainWindow(title: "Saved", message:"Saved record in Database successfully")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }

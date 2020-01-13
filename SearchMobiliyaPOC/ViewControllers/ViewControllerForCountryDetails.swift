@@ -33,23 +33,25 @@ class ViewControllerForCountryDetails: UIViewController {
     }
     
     func setData() {
-        labelForRegion.text = details?.region
+        labelForRegion.text = details?.region!
         labelForCapital.text = details?.capital
-        labelForLanguage.text = details?.capital
+        labelForLanguage.text = details?.language
         labelForCurrency.text = details?.currency
         labelForSubregion.text = details?.subregion
         labelForCallingCode.text = details?.callingCode
         labelForCountryName.text = details?.countryName
         labelForTimeZone.text = details?.timeZone
         labelForLanguage.text = details?.language
-        details?.imageData = SVGKExporterNSData.export(asNSData: viewForFlag.image)
-        
         
         if let flag = details?.flag, let flagUrl = URL(string: flag), Reachability.isConnected() {
             if !flag.contains("shn.svg") {
                 self.viewForFlag?.image = SVGKImage(contentsOf: flagUrl)
             }
         }
+        details?.imageData = SVGKExporterNSData.export(asNSData: viewForFlag.image)
+        
+        print("imagedata--\( details?.imageData)")
+
     }
     
     @IBAction func FnToAddDetailsToOffline(_ sender: Any) {

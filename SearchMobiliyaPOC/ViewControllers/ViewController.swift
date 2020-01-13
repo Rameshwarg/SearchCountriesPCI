@@ -24,6 +24,7 @@ class ViewController: UIViewController,UITextFieldDelegate,CountryViewModelDeleg
     @IBOutlet weak var searchCountryTableView: UITableView!
     private let countryViewModel = CountryViewModel()
     var countries = [CountryDataModel]()
+    var countriesFromDB = [CountryDataModel]()
     var isOffline = false
     
     override func viewDidLoad() {
@@ -68,12 +69,18 @@ class ViewController: UIViewController,UITextFieldDelegate,CountryViewModelDeleg
             UIActivityviewController.shared.showActivityIndicator(uiView: self.view)
             DispatchQueue.global(qos: .background).async {
                 self.countryViewModel.requestCountriesByName(countryName: text)
-             }
+            }
         } else {
-            UIAlertControllerForAlert.sharedInstance.showAlert(view: self, title:"Error" , message:NetworkError.noInternet.rawValue )
+            if let result = countryViewModel.searchDataInLocalDB(text:text) {
+                countries = result
+                DispatchQueue.main.async { [unowned self] in
+                    self.searchCountryTableView?.reloadData()
+                }
+            }
         }
     }
     
+    // MARK: - UITTextField Delegate Methods-----
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         if let text = textField.text,
@@ -90,6 +97,8 @@ class ViewController: UIViewController,UITextFieldDelegate,CountryViewModelDeleg
         return true
     }
     
+    // MARK: - Custom Delegate Methods-----
+
     func didReceiveCountries(countries: [CountryDataModel]) {
         if countries.count > 0 {
             self.countries.removeAll()

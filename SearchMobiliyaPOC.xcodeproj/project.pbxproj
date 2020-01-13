@@ -215,7 +215,6 @@
 			children = (
 				87E0047E23C8F5EE00B57A91 /* TableviewCells */,
 				87E0043E23C8EB3300B57A91 /* ViewController.swift */,
-				8722E73223C9EAD000930CBB /* RegionalBlock.swift */,
 				87E0046D23C8ECC600B57A91 /* ViewControllerForCountryDetails.swift */,
 			);
 			path = ViewControllers;
@@ -232,6 +231,7 @@
 		87E0047B23C8F55400B57A91 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8722E73223C9EAD000930CBB /* RegionalBlock.swift */,
 				873F1C4A23CB1ADB00E1B605 /* UIActivityviewController.swift */,
 				873F1C4823CB19D100E1B605 /* DiscoveryUIAlertController.swift */,
 				87E0048B23C8FE1C00B57A91 /* Error.swift */,

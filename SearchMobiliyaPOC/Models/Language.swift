@@ -1,9 +1,9 @@
 //
 //  Language.swift
-//  REST Countries Framework
+//  SearchMobiliyaPOC
 //
-//  Created by Cédric Rolland on 22.01.19.
-//  Copyright © 2019 Cédric Rolland. All rights reserved.
+//  Created by Ram Gade on 2020/01/10.
+//  Copyright © 2020 Ram Gade. All rights reserved.
 //
 
 public struct Language: CountryData, Codable {

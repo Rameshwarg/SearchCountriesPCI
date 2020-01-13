@@ -1,10 +1,12 @@
 //
 //  CountryViewModel.swift
-//  REST Countries Framework
+//  SearchMobiliyaPOC
 //
-//  Created by Cédric Rolland on 23.01.19.
-//  Copyright © 2019 Cédric Rolland. All rights reserved.
+//  Created by Ram Gade on 2020/01/10.
+//  Copyright © 2020 Ram Gade. All rights reserved.
 //
+
+import UIKit
 
 public protocol CountryViewModelDelegate: AnyObject {
     func didReceiveCountries(countries: [CountryDataModel])
@@ -34,4 +36,14 @@ public class CountryViewModel {
         }
         unownedSelf.delegate?.didReceiveCountries(countries: result)
     }
+    
+    func searchDataInLocalDB(text:String) -> [CountryDataModel]? {
+        let result = DataBaseOperation.shared.retrieveCountryData()
+        let resultPredicate = NSPredicate(format: "self contains[cd] %@", text)
+        let filtered = result?.filter {
+            resultPredicate.evaluate(with: $0.countryName.replacingOccurrences(of: " ", with: ""))
+        }
+        return filtered
+    }
+    
 }
