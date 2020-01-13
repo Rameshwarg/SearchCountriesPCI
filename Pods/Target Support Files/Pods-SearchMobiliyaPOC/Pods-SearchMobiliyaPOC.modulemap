@@ -1,0 +1,6 @@
+framework module Pods_SearchMobiliyaPOC {
+  umbrella header "Pods-SearchMobiliyaPOC-umbrella.h"
+
+  export *
+  module * { export * }
+}
